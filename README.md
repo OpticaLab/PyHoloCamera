@@ -116,11 +116,21 @@ bash system_setup.sh
 
 Here we just introduce a general workflow to control the camera from remote 
 <p align="center">
-<img src="https://github.com/LucaTeruzzi/PyHoloCamera/assets/83271765/aadc65e7-f83c-474e-a3fd-addf49fcacb4" width=50% height=50%>
+<img src="https://github.com/LucaTeruzzi/PyHoloCamera/assets/83271765/aadc65e7-f83c-474e-a3fd-addf49fcacb4" width=30% height=30%>
 </p>
 
 First, the Raspberry device connects to the camera and simultaneously recognizes any external storage
-device. Measurements can be started, stopped or paused by acting through RaspController on the proper GPIO channels of the Raspberry. All the GPIOs are initially configured with default values of “0” (off), except for GPIO 17, which is set to “1” (on). This particular GPIO is used to indicate the status of the pin (“0” = disabled remote control, “1” = activated remote control). All GPIOs are initially configured with default values of "0" (off), except for GPIO 17, which is set to "1" (on). This particular GPIO is used to indicate the pin’s status (0 = deactivate remote control, 1 = activate remote control). The acquisition of the background (2) starts by switching the GPIO 14 to on state. After acquiring the images needed to obtain the background, the system allows to start the measurement by switching the GPIO 15 to on. After reading each image the system checks for the presence of an object within the frame by calculating the variance following the procedure........ If this filter is passed the image is stored into the external device. Alternatively, it could be processed for the holographic reconstruction in real–time. In our case the maximum frame rate was ∼3 images per second, although higher rates can be achieved by using devices with higher RAM capacity.
+device. Measurements can be started, stopped or paused by acting through RaspController on the proper GPIO channels of the Raspberry. 
+All the GPIOs are initially configured with default values of “0” (off), except for GPIO 17, which is set to “1” (on). 
+This particular GPIO is used to indicate the status of the pin (“0” = disabled remote control, “1” = activated remote control). 
+All GPIOs are initially configured with default values of "0" (off), except for GPIO 17, which is set to "1" (on). 
+This particular GPIO is used to indicate the pin’s status (0 = deactivate remote control, 1 = activate remote control). 
+The acquisition of the background (2) starts by switching the GPIO 14 to on state. 
+After acquiring the images needed to obtain the background, the system allows to start the measurement by switching the GPIO 15 to on. 
+After reading each image the system checks for the presence of an object within the frame by calculating the variance following the procedure........ 
+If this filter is passed the image is stored into the external device. 
+Alternatively, it could be processed for the holographic reconstruction in real–time. 
+In our case the maximum frame rate was ∼3 images per second, although higher rates can be achieved by using devices with higher RAM capacity.
 Switching the GPIO 17 off, the measurement is stopped. The procedure can be halted through GPIO 23.
 
 # Contributions

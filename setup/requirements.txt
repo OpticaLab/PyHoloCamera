@@ -1,0 +1,7 @@
+termcolor
+pyueye
+opencv-python
+numpy
+matplotlib
+scipy
+pillow

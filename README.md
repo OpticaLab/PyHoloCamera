@@ -19,44 +19,99 @@ This README gives a brief overview of the key information required to install an
 
 ## Package setup
 
-To run the script on his own laptop or PC, the user first need to install the specified Python
-packages:
+### IDS software suite
 
-• numpy ≥ 1.21, matplotlib ≥ 3.6.2 and math (default packages);
+For IDS software (required to use the Ueye camera implemented in the system): from the official IDS website download the "IDS Software Suite" software for Linux ARM operating 
+systems with 64-bit architecture, version v8 and "hard" floating point (https://en.ids-imaging.com/download-details/AB.0010.1.55500.23.html?os=linux_arm&version=v8&bus=64&floatcalc=hard)
+It is recommended to download the archive version ('IDS Software Suite 4.96.1 for ARMv8 64-bit (hf) - archive file') and follow the instructions in the README file for proper installation. 
 
-• pyserial, for setting the serial communication through the RS232 port between the SPOS instrument and the PC;
+In summary: 
 
-• PyQt5, pyqtgraph, qtwidgets required for the graphical user interface;
-
-• termcolor;
-
-• pandas;
-
-• os-sys ≥ 2.1.4;
-
-• scipy ≥ 1.9.3 (optimize, interpolate), needed for computing the instrumental calibration
-curve;
-
-• miepython, for computations regardig Mie scattering parameters (eg. scattering and extinction cross sections);
-
-• openpyxl, for exporting data in xlsx files.
-
-To do so, after installing Python3 and pip3, you can just copy and paste the following line in the
-command line:
+1) Install all the required IDS packages: 
 ```
-pip3 install numpy≥1.21, matplotlib≥3.6.2, os-sys≥2.1.4, pyserial, PyQt5, pyqtgraph, qtwidgets, termcolor, scipy≥1.9.3, miepython, openpyxl, pandas
+sudo apt-get install debconf cmake libc6 libomp5 libatomic1 libstdc++6 libqt5opengl5 libqt5concurrent5 libqt5gui5 libqt5widgets5 build-essential libcap2 libusb-1.0-0 libqt5network5 libqt5xml5
 ```
-Otherwise, you can run the setup.py script in the ”setup” folder by typing:
+
+2) Copy the .tgz / .tar files in the Home folder and extract them: 
 ```
-python3 setup.py
+tar xvf ueye_<version>_<arch>.tar 
 ```
+
+3) Run the .run file and confirm any intermediate requests: 
+```
+sudo sh ./ueye-<version>_<arch>.run 
+```
+
+### Python libraries and routines
+
+1) Install Python3.9 and Pip (or verify their current installation) 
+
+2) Install the required packages by typing on the command line: 
+```
+sudo pip3 install termcolor pyueye pillow opencv-python numpy 
+```
+
+3) Connect the USB stick containing the .py files for interfacing with the Ueye camera. 
+If the USB is recognised immediately by the system, proceed with the following step (the USB is visible in the folder /media). 
+Otherwise, it is necessary to mount the USB stick and, after the files have been copied, unmount it before removing it from the Raspberry Pi3:
+```
+sudo blkid (to find the name under which the USB stick is read, i.e. /dev/sda) 
+sudo mkdir /media/usb 
+sudo mount /dev/sda /media/usb
+... 
+sudo umount /media/usb
+```
+
+4) Copy the .py files from the USB stick or external hard disk into the PyCamera_control folder (to be created within the directory /home)
+```
+sudo mkdir /home/PyCamera_control 
+sudo cp <nome del file da copiare> /home/PyCamera_control 
+```
+
+5) The .py files are set to save all results within a specially dedicated folder created on an external storage device; if you do not want to connect an external disk, or if you want to do it under another name, edit the first lines of the PyCamera.py file. 
+```
+sudo nano PyCamera.py  
+```
+When finished editing, press Ctrl+O to save and then Ctrl+X to exit.
+
+### Bash files: 
+
+Install the screen package: 
+```
+sudo apt-get screen 
+```
+
+### RaspController configuration through RaspAp application: 
+
+1) Download the RaspController application to your smartphone or tablet.
+2) Installing RaspAp on Raspberry Pi3 (https://raspap.com/) and type in the command line:
+```
+sudo apt-get update 
+sudo apt-get full-upgrade 
+sudo reboot 
+
+sudo raspi-config 
+ 
+curl -sL https://install.raspap.com | bash 
+ 
+sudo reboot 
+```
+The ```sudo raspi-config``` command is required to to set the proper WiFi location options, otherwise the communication protocol may fail. 
+
+During installation, confirm all the choices proposed by the Quick installer and ensure that the Internet connection is never lost. After the last system reboot, the access point (AP) will present the default RaspAp settings: 
+**`IP address`**: 10.3.141.1 
+**`Username`**: admin 
+**`Password`**: secret 
+**`DHCP range`**: 10.3.141.50 — 10.3.141.255 
+**`SSID`**: raspi-webgui 
+**`Password`**: ChangeMe
 
 ## How to use
 
-The algorithm is designed to be extremely user-friendly and can be run dircetly from command line by typing:
+The algorithm is designed to be extremely user-friendly and can be run directly from command line by typing:
 
 ```
-python3 spos_main.py
+bash system_setup.sh
 ```
 
 # Contributions

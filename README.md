@@ -135,7 +135,7 @@ This particular GPIO is used to indicate the pin’s status (0 = deactivate remo
 The acquisition of the background starts by switching the GPIO 14 to on state. 
 
 After acquiring the images needed to obtain the background, the system allows to start the measurement by switching the GPIO 15 to on. 
-After reading each image the system checks for the presence of an object within the frame by calculating the variance following the procedure........ 
+After reading each image the system checks for the presence of an object within the frame by calculating the image variance. 
 If this filter is passed the image is stored into the external device. 
 Alternatively, it could be processed for the holographic reconstruction in real–time. 
 

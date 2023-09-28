@@ -99,17 +99,17 @@ sudo reboot
 The ```sudo raspi-config``` command is required to to set the proper WiFi location options, otherwise the communication protocol may fail. 
 
 During installation, confirm all the choices proposed by the Quick installer and ensure that the Internet connection is never lost. After the last system reboot, the access point (AP) will present the default RaspAp settings: 
-#
+
 **`IP address`**: 10.3.141.1 
-#
+
 **`Username`**: admin 
-#
+
 **`Password`**: secret 
-#
+
 **`DHCP range`**: 10.3.141.50 — 10.3.141.255 
-#
+
 **`SSID`**: raspi-webgui 
-#
+
 **`Password`**: ChangeMe
 
 ## How to use
@@ -122,7 +122,7 @@ bash system_setup.sh
 
 Here we just introduce a general workflow to control the camera from remote 
 <p align="center">
-<img src="https://github.com/LucaTeruzzi/PyHoloCamera/assets/83271765/46a63f4b-d7a6-4c17-8724-eeae64965bd8" width=30% height=30%>
+<img src="https://github.com/LucaTeruzzi/PyHoloCamera/assets/83271765/46a63f4b-d7a6-4c17-8724-eeae64965bd8" width=45% height=45%>
 </p>
 
 First, the Raspberry device connects to the camera and simultaneously recognizes any external storage
